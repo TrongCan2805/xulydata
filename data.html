@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+
+<body>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <img src="img/OIP.jpg" alt="" />
+    </div>
+    <ul class="sidebar-menu">
+      <li>
+        <a href="index.html"> <i class="fa-solid fa-square-h"></i> Home </a>
+      </li>
+      <li>
+        <a href=""> <i class="fa-solid fa-file"></i> Docs </a>
+      </li>
+      <li>
+        <a href="control.html">
+          <i class="fa-solid fa-bolt"></i> Control Device
+        </a>
+      </li>
+      <li class="dropdown">
+        <a href="" class="dropdown-toggle">
+          <span> <i class="fas fa-file-alt"></i> Node IOT</span>
+          <i class="fa-solid fa-angle-down"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Device 1</a></li>
+          <li><a href="#">Device 2</a></li>
+          <li><a href="#">Device 3</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="chart.html"> <i class="fas fa-chart-bar"></i> Chart </a>
+      </li>
+      <li>
+        <a href="data.html"> <i class="fas fa-database"></i> Data </a>
+      </li>
+      <li>
+        <a href="#"> <i class="fas fa-cog"></i> Setting </a>
+      </li>
+      <li>
+        <a href="help.html"> <i class="fas fa-question-circle"></i> Help </a>
+      </li>
+    </ul>
+  </nav>
+  <section class="dashboard">
+    <header>
+      <div class="box__header-left">
+        <button class="open-btn" onclick="toggleMenu()">
+          <i class="fa-solid fa-bars" style="font-size: 24px"></i>
+        </button>
+
+        <input type="text" class="search" placeholder="Tìm kiếm" />
+        <button class="btn-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+      <div class="box__header-right">
+        <!-- icon thông báo -->
+        <i class="fa-solid fa-bell"></i>
+        <!-- icon setting -->
+        <i class="fa-solid fa-gear"></i>
+        <!-- icon user -->
+        <i class="fa-solid fa-circle-user"></i>
+      </div>
+    </header>
+    <h2 class="title">Control</h2>
+    <section class="conent__body">
+      <div class="container__content-body">
+        <div class="bage">
+          <h2>Welcome!</h2>
+          <p>Vui lòng chọn thời gian để kiểm tra dữ liệu</p>
+        </div>
+        <button class="btn fs-16" style="margin-right: 40px">
+          <i class="fa-regular fa-file fs-24"></i> <span>Learn More</span>
+        </button>
+      </div>
+    </section>
+    <section class="conent__body">
+      <div class="container__body--filter">
+        <div>
+          <label for="minTemp">Nhiệt độ tối thiểu:</label>
+          <input type="number" id="minTemp" placeholder="Nhập nhiệt độ tối thiểu">
+
+          <label for="maxHumidity">Độ ẩm tối đa:</label>
+          <input type="number" id="maxHumidity" placeholder="Nhập độ ẩm tối đa">
+
+          <button id="btn-fillter">Áp dụng lọc</button>
+        </div>
+        <div class="table-container">
+          <table class="custom-table" id="dataTable">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Nhiệt độ</th>
+                <th>Độ ẩm</th>
+                <th>Độ dẫn điện</th>
+                <th>Độ PH đất</th>
+                <th>Nitơ Phospho</th>
+                <th>Kali</th>
+                <th>Ngày ghi nhận</th>
+              </tr>
+            </thead>
+            <tbody id="dataBody">
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <script src="script.js" type="module"></script>
+  <script src="control.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <img src="img/OIP.jpg" alt="">
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="index.html">
+                    <i class="fa-solid fa-square-h"></i> Home
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa-solid fa-file"></i> Docs
+                </a>
+            </li>
+            <li>
+                <a href="control.html">
+                    <i class="fa-solid fa-bolt"></i> Control Device
+                </a>
+            </li>
+            <li class="dropdown">
+                <a href="" class="dropdown-toggle">
+                    <span> <i class="fas fa-file-alt"></i> Node IOT</span>
+                    <i class="fa-solid fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Device 1</a></li>
+                    <li><a href="#">Device 2</a></li>
+                    <li><a href="#">Device 3</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="chart.html">
+                    <i class="fas fa-chart-bar"></i> Chart
+                </a>
+            </li>
+            <li>
+                <a href="data.html">
+                    <i class="fas fa-database"></i> Data
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-cog"></i> Setting
+                </a>
+            </li>
+            <li>
+                <a href="help.html">
+                    <i class="fas fa-question-circle"></i> Help
+                </a>
+            </li>
+            
+
+        </ul>
+    </nav>
+    <section class="dashboard">
+        <header>
+            <div class="box__header-left">
+                <button class="open-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"
+                        style="font-size: 24px;"></i></button>
+
+                <input type="text" class="search" placeholder="Tìm kiếm">
+                <button class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+            </div>
+            <div class="box__header-right">
+                <!-- icon thông báo -->
+                <i class="fa-solid fa-bell"></i>
+                <!-- icon setting -->
+                <i class="fa-solid fa-gear"></i>
+                <!-- icon user -->
+                <i class="fa-solid fa-circle-user"></i>
+            </div>
+        </header>
+        <h2 class="title">Help Center</h2>
+        <section class="conent__body">
+            <div class="faq-container">
+                <h2>Dữ liệu</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question">Dữ liệu quan trắc được cập nhật như thế nào?</div>
+                    <div class="faq-answer">
+                        <p>Dữ liệu quan trắc được cập nhật tự động theo thời gian thực cứ 5 giây 1 lần từ gateway,
+                            tuy nhiên nhiều trường hợp vẫn có độ trễ do thuật toán hoặc kết nối internet không ổn
+                            định.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Tôi có thể tải dữ liệu về máy tính để phân tích không?</div>
+                    <div class="faq-answer">
+                        <p>Có, bạn có thể tải dữ liệu về máy tính ở định dạng CSV hoặc Excel. Để thực hiện, bạn vui
+                            lòng chọn khoảng thời gian cần tải và nhấp vào nút "Tải xuống".</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Làm thế nào để thiết lập cảnh báo khi giá trị vượt quá ngưỡng cho
+                        phép?</div>
+                    <div class="faq-answer">
+                        <p>Bạn có thể thiết lập cảnh báo bằng cách điều chỉnh các thông số trong phần cài đặt của
+                            ứng dụng.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Tại sao tôi không nhận được cảnh báo?</div>
+                    <div class="faq-answer">
+                        <p>Điều này có thể do bạn chưa kích hoạt tính năng cảnh báo trong phần cài đặt hoặc thiết bị
+                            của bạn không kết nối internet.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Tại sao biểu đồ của tôi không hiển thị dữ liệu?</div>
+                    <div class="faq-answer">
+                        <p>Biểu đồ sẽ không hiển thị dữ liệu nếu không có dữ liệu mới trong khoảng thời gian đã chọn
+                            hoặc kết nối với hệ thống bị gián đoạn.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Tại sao biểu đồ của tôi không hiển thị dữ liệu?</div>
+                    <div class="faq-answer">
+                        <p>Biểu đồ sẽ không hiển thị dữ liệu nếu không có dữ liệu mới trong khoảng thời gian đã chọn
+                            hoặc kết nối với hệ thống bị gián đoạn.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Tại sao biểu đồ của tôi không hiển thị dữ liệu?</div>
+                    <div class="faq-answer">
+                        <p>Biểu đồ sẽ không hiển thị dữ liệu nếu không có dữ liệu mới trong khoảng thời gian đã chọn
+                            hoặc kết nối với hệ thống bị gián đoạn.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Tại sao biểu đồ của tôi không hiển thị dữ liệu?</div>
+                    <div class="faq-answer">
+                        <p>Biểu đồ sẽ không hiển thị dữ liệu nếu không có dữ liệu mới trong khoảng thời gian đã chọn
+                            hoặc kết nối với hệ thống bị gián đoạn.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="conent__body">
+            <div class="faq-container">
+                <h2>Giao diện chứ năng</h2>
+                <div class="faq-item">
+                    <div class="faq-question">Làm thế nào để xem lịch sử quan trắc?</div>
+                    <div class="faq-answer">
+                        <p>Biểu đồ sẽ không hiển thị dữ liệu nếu không có dữ liệu mới trong khoảng thời gian đã chọn
+                            hoặc kết nối với hệ thống bị gián đoạn.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="conent__body">
+            <div class="container__body--help">
+                <div class="body__help--right">
+                    <div class="help__right--title">
+                        <i class="fa-solid fa-headphones-simple"></i>
+                        <span class="fs-24 fw-600">Trung tâm hỗ trợ</span>
+                    </div>
+                    <div class="help__right--body">
+                        <span class="fs-16">Dự án được phát triển bởi Lê Trọng Cần Trường ĐH Công Nghiệp TpHCM. Nếu cần hỗ trợ vui lòng
+                            liên hệ</span>
+                    </div>
+                    <div class="help__right--contact">
+                        <div class="right__contact--group">
+                            <span class="fw-600">Tel:</span> <span>0854021154</span>
+                        </div>
+                        <div class="right__contact--group">
+                            <span class="fw-600">Email:</span> <span>trongcan2805@gmail.com</span>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="body__help--right">
+                    <div class="help__right--title">
+                        <i class="fa-solid fa-earth-asia"></i>
+                        <span class="fs-16">Want to upgrade</span>
+                    </div>
+                    <div class="help__right--body">
+                        <span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates aut
+                            consequuntur?</span>
+                    </div>
+                    <div class="help__right--check">
+                        <div class="right__check--group">
+                            <i class="fa-solid fa-check"></i>
+                            <span>Phasellus varius vel risus vel aliquam</span>
+                        </div>
+                        <div class="right__check--group">
+                            <i class="fa-solid fa-check"></i>
+                            <span>Maecenas varius nulla</span>
+                        </div>
+                        <div class="right__check--group">
+                            <i class="fa-solid fa-check"></i>
+                            <span>lorem ipsum dolor sit amet</span>
+                        </div>
+                        
+                    </div>
+                    <div class="help__right--button">
+                        <button class="btn">Action</button>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </section>
+    <script src="script.js" type="module"></script>
+    <script src="control.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>
+</body>
+
+</html>

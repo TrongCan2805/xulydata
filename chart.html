@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <img src="img/OIP.jpg" alt="" />
+      </div>
+      <ul class="sidebar-menu">
+        <li>
+          <a href="index.html"> <i class="fa-solid fa-square-h"></i> Home </a>
+        </li>
+        <li>
+          <a href=""> <i class="fa-solid fa-file"></i> Docs </a>
+        </li>
+        <li>
+          <a href="control.html">
+            <i class="fa-solid fa-bolt"></i> Control Device
+          </a>
+        </li>
+        <li class="dropdown">
+          <a href="" class="dropdown-toggle">
+            <span> <i class="fas fa-file-alt"></i> Node IOT</span>
+            <i class="fa-solid fa-angle-down"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Device 1</a></li>
+            <li><a href="#">Device 2</a></li>
+            <li><a href="#">Device 3</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="chart.html"> <i class="fas fa-chart-bar"></i> Chart </a>
+        </li>
+        <li>
+          <a href="data.html"> <i class="fas fa-database"></i> Data </a>
+        </li>
+        <li>
+          <a href="#"> <i class="fas fa-cog"></i> Setting </a>
+        </li>
+        <li>
+          <a href="help.html"> <i class="fas fa-question-circle"></i> Help </a>
+        </li>
+      </ul>
+    </nav>
+    <section class="dashboard">
+      <header>
+        <div class="box__header-left">
+          <button class="open-btn" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars" style="font-size: 24px"></i>
+          </button>
+
+          <input type="text" class="search" placeholder="Tìm kiếm" />
+          <button class="btn-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+        <div class="box__header-right">
+          <!-- icon thông báo -->
+          <i class="fa-solid fa-bell"></i>
+          <!-- icon setting -->
+          <i class="fa-solid fa-gear"></i>
+          <!-- icon user -->
+          <i class="fa-solid fa-circle-user"></i>
+        </div>
+      </header>
+      <h2 class="title">Control</h2>
+      <section class="conent__body">
+        <div class="container__content-body">
+          <div class="bage">
+            <h2>Welcome!</h2>
+            <p>
+              Các biểu đồ bên dưới hiện thị dữ liệu 40 dữ liệu gần nhất với tầng
+              xuất update dữ liệu từ database là 30 giây 1 lần. Để xem toàn bộ
+              dữ liệu hoặc lọc dữ lệu vui lòng truy cập vào mục Data.......Xin
+              cảm ơn
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="conent__body">
+        <div class="chart-container">
+          <!-- Line Chart -->
+          <div class="chart-item">
+            <h3>Line Chart</h3>
+            <canvas id="lineChart"></canvas>
+          </div>
+
+          <!-- Bar Chart -->
+          <div class="chart-item">
+            <h3>Bar Chart</h3>
+            <canvas id="lineChart2"></canvas>
+          </div>
+        </div>
+      </section>
+      <section class="conent__body">
+        <div class="chart-container">
+          <!-- Line Chart -->
+          <div class="chart-item">
+            <h3>Biểu đồ NPK</h3>
+            <canvas id="lineChart-Humidity"></canvas>
+          </div>
+
+          <!-- Bar Chart -->
+          <div class="chart-item">
+            <h3>PH đất</h3>
+            <canvas id="lineChart-PH"></canvas>
+          </div>
+        </div>
+      </section>
+      <section class="conent__body">
+        <div class="chart-container">
+          <!-- Line Chart -->
+          <div class="chart-item">
+            <h3>Độ dãn điện đất (EC)</h3>
+            <canvas id="lineChart-EC"></canvas>
+          </div>
+
+          <!-- Bar Chart -->
+          <div class="chart-item">
+            <h3>Hàm lượng Nitơ</h3>
+            <canvas id="lineChart-N"></canvas>
+          </div>
+        </div>
+      </section>
+      <section class="conent__body">
+        <div class="chart-container">
+          <!-- Line Chart -->
+          <div class="chart-item">
+            <h3>Hàm lượng phốt pho</h3>
+            <canvas id="lineChart-Pho"></canvas>
+          </div>
+
+          <!-- Bar Chart -->
+          <div class="chart-item">
+            <h3>Hàm lượng Kali</h3>
+            <canvas id="lineChart-Ka"></canvas>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <script src="script.js" type="module"></script>
+    <script src="control.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>
+    <script>
+      // Data for Line Chart (NPK)
+      var lineChartCtx = document.getElementById("lineChart").getContext("2d");
+      var lineChart = new Chart(lineChartCtx, {
+        type: "line",
+        data: {
+          labels: [],
+          datasets: [
+            {
+              label: "Độ ẩm",
+              data: [],
+              borderColor: "rgba(75, 192, 192, 1)",
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              fill: false,
+              tension: 0.1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true, // Đảm bảo giữ tỉ lệ biểu đồ
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "Phần trăm", // Ví dụ của biểu đồ Line
+              },
+            },
+            x: {
+              title: {
+                display: false,
+                text: "Date",
+              },
+            },
+          },
+        },
+      });
+
+      // Data for Bar Chart (Nhiệt độ)
+      var lineChart2Ctx = document
+        .getElementById("lineChart2")
+        .getContext("2d");
+      var lineChart2 = new Chart(lineChart2Ctx, {
+        type: "line",
+        data: {
+          labels: [
+            "2023-07-17",
+            "2023-07-18",
+            "2023-07-19",
+            "2023-07-20",
+            "2023-07-21",
+          ],
+          datasets: [
+            {
+              label: "Nhiệt độ",
+              data: [641, 629, 629, 638, 638],
+              borderColor: "rgba(220, 53, 69, 0.8)",
+              backgroundColor: "rgba(220, 53, 69, 0.2)",
+              fill: false,
+              tension: 0.1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true, // Đảm bảo giữ tỉ lệ biểu đồ
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "Độ C", // Ví dụ của biểu đồ Line
+              },
+            },
+            x: {
+              title: {
+                display: true,
+                text: "Date",
+              },
+            },
+          },
+        },
+      });
+    </script>
+    <script>
+      // Data for Line Chart (Độ ẩm)
+      var lineChartCtx = document
+        .getElementById("lineChart-Humidity")
+        .getContext("2d");
+      var lineChartHU = new Chart(lineChartCtx, {
+        type: "line",
+        data: {
+          labels: [
+            "2023-07-17",
+            "2023-07-18",
+            "2023-07-19",
+            "2023-07-20",
+            "2023-07-21",
+          ],
+          datasets: [
+            {
+              label: "Nitrogen",
+              data: [0, 10, 90, 63, 90],
+              borderColor: "rgba(75, 192, 192, 1)",
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              fill: false,
+              tension: 0.1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true, // Đảm bảo giữ tỉ lệ biểu đồ
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "NPK (mg/kg)", // Ví dụ của biểu đồ Line
+              },
+            },
+            x: {
+              title: {
+                display: true,
+                text: "Date",
+              },
+            },
+          },
+        },
+      });
+
+      // Data for Line Chart (PH đất)
+      var lineChartCtx = document
+        .getElementById("lineChart-PH")
+        .getContext("2d");
+      var lineChartPH = new Chart(lineChartCtx, {
+        type: "line",
+        data: {
+          labels: [
+            "2023-07-17",
+            "2023-07-18",
+            "2023-07-19",
+            "2023-07-20",
+            "2023-07-21",
+          ],
+          datasets: [
+            {
+              label: "Nitrogen",
+              data: [0, 10, 90, 63, 90],
+              borderColor: "rgba(75, 192, 192, 1)",
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              fill: false,
+              tension: 0.1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true, // Đảm bảo giữ tỉ lệ biểu đồ
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "NPK (mg/kg)", // Ví dụ của biểu đồ Line
+              },
+            },
+            x: {
+              title: {
+                display: true,
+                text: "Date",
+              },
+            },
+          },
+        },
+      });
+
+      // Data for Line Chart (EC độ dẫn điện)
+      var lineChartCtx = document
+        .getElementById("lineChart-EC")
+        .getContext("2d");
+      var lineChartEC = new Chart(lineChartCtx, {
+        type: "line",
+        data: {
+          labels: [
+            "2023-07-17",
+            "2023-07-18",
+            "2023-07-19",
+            "2023-07-20",
+            "2023-07-21",
+          ],
+          datasets: [
+            {
+              label: "Nitrogen",
+              data: [0, 10, 90, 63, 90],
+              borderColor: "rgba(75, 192, 192, 1)",
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              fill: false,
+              tension: 0.1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true, // Đảm bảo giữ tỉ lệ biểu đồ
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "NPK (mg/kg)", // Ví dụ của biểu đồ Line
+              },
+            },
+            x: {
+              title: {
+                display: true,
+                text: "Date",
+              },
+            },
+          },
+        },
+      });
+
+      // Data for Line Chart (Hàm lượng nitơ)
+      var lineChartCtx = document
+        .getElementById("lineChart-N")
+        .getContext("2d");
+      var lineChartN = new Chart(lineChartCtx, {
+        type: "line",
+        data: {
+          labels: [
+            "2023-07-17",
+            "2023-07-18",
+            "2023-07-19",
+            "2023-07-20",
+            "2023-07-21",
+          ],
+          datasets: [
+            {
+              label: "Nitrogen",
+              data: [0, 10, 90, 63, 90],
+              borderColor: "rgba(75, 192, 192, 1)",
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              fill: false,
+              tension: 0.1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true, // Đảm bảo giữ tỉ lệ biểu đồ
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "NPK (mg/kg)", // Ví dụ của biểu đồ Line
+              },
+            },
+            x: {
+              title: {
+                display: true,
+                text: "Date",
+              },
+            },
+          },
+        },
+      });
+
+      // Data for Line Chart (Hàm lượng Phốt pho)
+      var lineChartCtx = document
+        .getElementById("lineChart-Pho")
+        .getContext("2d");
+      var lineChartpho = new Chart(lineChartCtx, {
+        type: "line",
+        data: {
+          labels: [
+            "2023-07-17",
+            "2023-07-18",
+            "2023-07-19",
+            "2023-07-20",
+            "2023-07-21",
+          ],
+          datasets: [
+            {
+              label: "Nitrogen",
+              data: [0, 10, 90, 63, 90],
+              borderColor: "rgba(75, 192, 192, 1)",
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              fill: false,
+              tension: 0.1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true, // Đảm bảo giữ tỉ lệ biểu đồ
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "NPK (mg/kg)", // Ví dụ của biểu đồ Line
+              },
+            },
+            x: {
+              title: {
+                display: true,
+                text: "Date",
+              },
+            },
+          },
+        },
+      });
+
+      // Data for Line Chart (Hàm lượng Kali)
+      var lineChartCtx = document
+        .getElementById("lineChart-Ka")
+        .getContext("2d");
+      var lineChartka = new Chart(lineChartCtx, {
+        type: "line",
+        data: {
+          labels: [
+            "2023-07-17",
+            "2023-07-18",
+            "2023-07-19",
+            "2023-07-20",
+            "2023-07-21",
+          ],
+          datasets: [
+            {
+              label: "Nitrogen",
+              data: [0, 10, 90, 63, 90],
+              borderColor: "rgba(75, 192, 192, 1)",
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              fill: false,
+              tension: 0.1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true, // Đảm bảo giữ tỉ lệ biểu đồ
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "NPK (mg/kg)", // Ví dụ của biểu đồ Line
+              },
+            },
+            x: {
+              title: {
+                display: true,
+                text: "Date",
+              },
+            },
+          },
+        },
+      });
+
+      // Data for Bar Chart (Nhiệt độ)
+      var barChartCtx = document.getElementById("barChart").getContext("2d");
+      var barChart = new Chart(barChartCtx, {
+        type: "bar",
+        data: {
+          labels: [
+            "2023-07-17",
+            "2023-07-18",
+            "2023-07-19",
+            "2023-07-20",
+            "2023-07-21",
+          ],
+          datasets: [
+            {
+              label: "Nhiệt độ (°C)",
+              data: [25.2, 25.3, 25.4, 25.5, 27.1],
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              borderColor: "rgba(75, 192, 192, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true, // Đảm bảo giữ tỉ lệ biểu đồ
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: "NPK (mg/kg)", // Ví dụ của biểu đồ Line
+              },
+            },
+            x: {
+              title: {
+                display: true,
+                text: "Date",
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

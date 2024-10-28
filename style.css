@@ -1,0 +1,610 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    background-color: #E3ECF8;
+}
+
+.color-red {
+    color: red;
+}
+
+.color-green {
+    color: green;
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
+.fs-16 {
+    font-size: 16px;
+}
+
+.fs-20 {
+    font-size: 20px;
+}
+
+.fs-24 {
+    font-size: 24px;
+}
+
+.fs-34 {
+    font-size: 34px;
+}
+
+.fw-400 {
+    font-weight: 400;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.fw-700 {
+    font-weight: 700;
+}
+
+.btn {
+    background: #4880FF;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    height: 54px;
+    width: auto;
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+
+}
+.selected {
+    background-color: #852c33; /* Màu khi nút được chọn */
+    color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Hiệu ứng bóng đổ */
+  }
+.btn i {
+    margin-right: 10px;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    /* color: #; */
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    transition: left 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sidebar.visible {
+    left: 0;
+    /* Hiện menu khi có lớp 'visible' */
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%);
+    /* Ẩn menu */
+}
+
+.sidebar-header img {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.sidebar-menu {
+    list-style-type: none;
+}
+
+.sidebar-menu li {
+    margin-bottom: 20px;
+}
+
+.sidebar-menu li a {
+    color: #666666;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.sidebar-menu li a i {
+    font-size: 24px;
+    margin-right: 15px;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+/* Ẩn các dropdown menu */
+.sidebar-menu .dropdown-menu {
+    display: none;
+    list-style-type: none;
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.dropdown-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Hiển thị menu con khi được mở */
+.sidebar-menu .dropdown.active .dropdown-menu {
+    display: block;
+}
+
+.dashboard {
+    width: 100%;
+    transition: margin-left 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.body {
+    padding: 40px 32px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px;
+    background-color: #fff;
+}
+
+.title {
+    padding-top: 20px;
+    padding-left: 32px;
+}
+
+/* nút seach header */
+.box__header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search {
+    width: 300px;
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    outline: none;
+    transition: border 0.3s ease;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+}
+
+.search-2 {
+    width: auto;
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    outline: none;
+    transition: border 0.3s ease;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+}
+
+.search:focus {
+    border-color: #4285f4;
+    /* Màu sắc viền khi focus */
+}
+
+.btn-search {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 30px;
+    background-color: #4285f4;
+    /* Màu nền */
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.btn-search:hover {
+    background-color: #3367d6;
+    transform: scale(1.05);
+}
+
+/* các thẻ i header thông báo, cài đặt và người dùng */
+.btn-search i {
+    margin: 0;
+}
+
+.box__header-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.box__header-right i {
+    font-size: 32px;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s ease;
+}
+
+.box__header-right i:hover {
+    color: #4285f4;
+    transform: scale(1.2);
+}
+
+.open-btn {
+    background-color: transparent;
+    color: #666;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* nội dung */
+.conent__body {
+    padding: 20px 32px;
+}
+
+.container__content-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 24px 32px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.bage h2 {
+    margin-bottom: 30px;
+}
+
+.bage p {
+    margin-bottom: 4px;
+}
+
+.container__content-body .close {
+    position: absolute;
+    top: 10%;
+    right: 2%;
+}
+
+.container__content-bage {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bage-small {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 22%;
+    padding: 40px;
+    border-radius: 8px;
+    gap: 5px;
+    letter-spacing: 1.5px;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chart-item {
+    width: 45%;
+    text-align: center;
+}
+
+canvas {
+    width: 100%;
+    height: 400px;
+}
+
+/* control.html */
+/* -------------------------- */
+.container__body--control {
+    background: #fff;
+    padding: 24px 32px;
+    border-radius: 8px;
+}
+
+.wapper__control {
+    display: flex;
+    flex: 1;
+    gap: 32px;
+}
+
+.wapper__control--right {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 40%;
+    text-align: center;
+}
+
+.wapper__control--left {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    text-align: center;
+}
+
+.control-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    margin-top: 24px;
+    align-items: center
+}
+
+.control__left--setting_right {
+    display: grid;
+    gap: 12px;
+}
+
+.control__left--setting_left {
+    display: grid;
+    gap: 12px;
+}
+
+.control__setting {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    margin: 24px;
+}
+
+.setting__left-search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.setting__left-title {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.switch {
+    width: 80px;
+    height: 40px;
+    margin: 20px 50px;
+    position: relative;
+}
+
+.switch .slider {
+    width: 100%;
+    height: 100%;
+    background: #d3d3d3;
+    border-radius: 50px;
+    position: relative;
+    top: -30px;
+    transition: background .5s ease;
+    /* Thêm chuyển động màu nền */
+}
+
+.switch label {
+    display: block;
+    width: 30px;
+    height: 80%;
+    border-radius: 50px;
+    transition: all .5s ease;
+    /* Hiệu ứng chuyển động mượt mà cho tay gạt */
+    cursor: pointer;
+    position: absolute;
+    top: -7px;
+    z-index: 1;
+    left: 5px;
+    background: #ffffff;
+}
+
+.switch .checkbox:checked~.slider {
+    background: #4880FF;
+}
+
+.switch .checkbox:checked~label {
+    left: 57%;
+}
+
+/* -------------------------- */
+
+/* data.html */
+/* -------------------------- */
+.container__body--filter {
+    background: #fff;
+    padding: 24px 32px;
+    border-radius: 8px;
+}
+
+.body__top--fileter {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+/* Reset mặc định cho bảng */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 24px auto;
+}
+
+/* Định dạng bảng */
+.custom-table th,
+.custom-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+}
+
+/* Màu nền cho tiêu đề bảng */
+.custom-table thead {
+    background-color: #237DF7;
+    color: white;
+}
+
+/* Hiệu ứng hover cho từng hàng */
+.custom-table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Định dạng các hàng lẻ và chẵn */
+.custom-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.custom-table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* Kiểu chữ cho tiêu đề */
+.custom-table th {
+    background-color: #237DF7;
+
+}
+
+/* Kiểu cho dữ liệu */
+.custom-table td {
+    color: #333;
+}
+
+/* Thêm khoảng cách và căn giữa bảng */
+.table-container {
+    text-align: center;
+}
+
+/* -------------------------- */
+/* help.html */
+/* -------------------------- */
+/* CSS cho tiêu đề */
+.faq-container {
+    background: #fff;
+    padding: 24px 32px;
+    border-radius: 8px;
+}
+
+.faq-container h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* CSS cho các câu hỏi */
+.faq-question {
+    font-size: 18px;
+    color: #00a991;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: color 0.3s ease;
+}
+
+.faq-question:hover {
+    color: #237DF7;
+}
+
+/* CSS cho các câu trả lời */
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 15px;
+    transition: max-height 0.4s ease-in-out;
+}
+
+.faq-answer p {
+    margin: 5px 0;
+}
+
+/* Đường viền dưới của các câu hỏi */
+.faq-question::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+    margin-top: 10px;
+}
+
+/* Hiển thị câu trả lời */
+.faq-answer.show {
+    max-height: 200px;
+    /* Điều chỉnh độ cao tùy thuộc vào nội dung */
+}
+
+.container__body--help{
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+}
+.body__help--right{
+    background: #fff;
+    padding: 24px 32px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.help__right--title{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.help__right--title i{
+    font-size: 24px;
+    background: #DBDBDB;
+    color: #999999;
+    padding: 5px;
+    border-radius: 8px;
+}
+.help__right--contact{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.help__right--check{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.right__check--group {
+    display: flex;
+    gap: 12px;
+}
+.right__check--group i{
+    color: #08E77C;
+}
+/* -------------------------- */
